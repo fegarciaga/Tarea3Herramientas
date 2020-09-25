@@ -19,7 +19,29 @@ int main(int argc, char **argv)
 
 double myatan(double x, int n)
 {
-    double x1= x, f=0, sign=1.0, sign1=1.0;
+    double x1= x,  sign=0, sign1=1.0;
+    if(x>0)
+    {
+        if(x>1)
+        {
+            x1=1/x;
+            sign=1.0;
+            sign1=-1.0;
+        }
+    }
+    else
+    {
+        if(x>=-1)
+        {
+            x1=-x;
+            sign1=-1.0;
+        }
+        else
+        {
+            x1=-1/x;
+            sign=-1.0;
+        }
+    }
     double a=std::pow(2.0, -(1.0*n)/2), b=x1/(1+std::sqrt(1+x1*x1)), c=1.0, d=1.0;
     while(1-a>std::pow(2.0, -1.0*n))
     {
@@ -30,6 +52,6 @@ double myatan(double x, int n)
         b=d/(1+std::sqrt(1+d*d));
         a=2.0*std::sqrt(a)/(1+a);
     }
-    return sign1*c*std::log((1+b)/(1-b))+f*sign*M_PI/2.0;
+    return sign1*c*std::log((1+b)/(1-b))+sign*M_PI/2.0;
     
 }
